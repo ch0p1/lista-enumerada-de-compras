@@ -1,3 +1,5 @@
+import tkinter as tk
+from tkinter import messagebox
 from datetime import date
 fecha = date.today()
 
@@ -8,7 +10,7 @@ print(f"Hoy es {fecha} así que compra la cena navideña 🎅")
 while True:
     print("\n1 Crear lista de compras")
     print("2 Añadir productos a tu lista")
-    print("3 Crear nueva lista")
+    print("3 Mostrar lista de compras")
     print("4 Salir")
 
     opc = input("Opción: ")
@@ -33,9 +35,16 @@ while True:
             lista_c.append(comp)
 
     elif opc == "3":
-        lista_c.clear()
-        print("Lista reiniciada.")
-
+        if lista_c:
+            root = tk.Tk()
+            root.withdraw()  # Oculta ventana principal
+            mostrar_texto = ""
+            for i, item in enumerate(lista_c, start=1):
+                mostrar_texto += f"{i}. {item}\n"
+            messagebox.showinfo("Lista de Compras", mostrar_texto)
+            root.destroy()
+        else:
+            print("La lista está vacía.")
     elif opc == "4":
         break
 
@@ -45,3 +54,5 @@ while True:
 print("\nLista de compras cena navideña:")
 for i, comp in enumerate(lista_c, start=1):
     print(i, comp)
+
+
